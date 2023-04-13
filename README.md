@@ -14,3 +14,8 @@ npx react-native run-android
 ```
 ## react native version -0.71.6
 ## react version -18.2.0
+
+
+username=admin
+password=admin
+```

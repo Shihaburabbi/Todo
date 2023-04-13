@@ -11,6 +11,7 @@ import Home from '../screen/Home';
 import Profile from '../screen/Profile';
 import Setting from '../screen/Setting';
 import CustomDrawer from '../components/CustomDrawer';
+import InitialScreen from '../screen/InitialScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -45,8 +46,9 @@ function RootNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Auth"
+        initialRouteName="InitialScreen"
         screenOptions={{headerShown: false}}>
+        <Stack.Screen name="InitialScreen" component={InitialScreen} />
         <Stack.Screen name="Auth" component={Auth} />
         <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
       </Stack.Navigator>

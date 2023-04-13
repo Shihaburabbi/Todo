@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+
 import {
   View,
   Text,
@@ -8,11 +9,13 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import BackIcon from '../SvgIcon/BackIcon';
 import ProfileIcon from '../SvgIcon/ProfileIcon';
 import SettingIcon from '../SvgIcon/Setting';
@@ -47,7 +50,29 @@ const CustomDrawer = props => {
             <Text style={styles.header_title}>Setting</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('Auth')}
+            onPress={() => {
+              props.navigation.toggleDrawer();
+              Alert.alert(
+                'Logout',
+                'Are you sure? You want to logout?',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {
+                      return null;
+                    },
+                  },
+                  {
+                    text: 'Confirm',
+                    onPress: async () => {
+                      await AsyncStorage.clear();
+                      props.navigation.navigate('InitialScreen');
+                    },
+                  },
+                ],
+                {cancelable: false},
+              );
+            }}
             style={styles.route_item}>
             <LogoutIcon />
             <Text style={styles.header_title}>Logout</Text>

@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Keyboard} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Errors = {
   username?: string;
@@ -37,7 +38,12 @@ const useLoginController = () => {
   };
 
   const onClickLogin = async () => {
-    navigation.navigate('DrawerNavigation');
+    if (inputs.username === 'admin' || inputs.password === 'admin') {
+      AsyncStorage.setItem('user', inputs.username);
+      navigation.navigate('DrawerNavigation');
+    } else {
+      alert('username and password not match');
+    }
   };
 
   return {
